@@ -71,8 +71,17 @@ struct Object {
         return Object { getBang<ValueType::Object>(name) };
     }
 
-    template<std::constructible_from<Object> T>
+    template<
+#if __cplusplus >= 202002L
+    std::constructible_from<Object>
+#else
+    typename
+#endif
+    T>
     constexpr inline auto maybeGetAs(const std::string& name) const -> std::optional<T> {
+        static_assert(std::is_constructible_v<T, Object>,
+                      "Given type must be constructible from simple_json::Object");
+
         if (auto&& object = getObject(name)) {
             return T(std::move(*object));
         }
