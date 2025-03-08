@@ -52,3 +52,6 @@
 
 # Xcode project
 *.xcodeproj/
+
+# Misc
+.*
