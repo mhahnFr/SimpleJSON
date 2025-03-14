@@ -19,8 +19,8 @@
  * SimpleJSON, see the file LICENSE.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-#include <Exception.hpp>
-#include <parser.hpp>
+#include <SimpleJSON/Exception.hpp>
+#include <SimpleJSON/parser.hpp>
 
 namespace simple_json {
 static inline void skipWhitespaces(std::istream& in) {
