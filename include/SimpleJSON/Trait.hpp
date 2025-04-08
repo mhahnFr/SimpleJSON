@@ -30,8 +30,18 @@
 
 namespace simple_json {
 struct Value;
+
+/**
+ * The type used for the content of a JSON object.
+ */
 using ObjectContent = std::map<std::string, Value>;
 
+/**
+ * This structure contains a `using` declaration for the value type represented
+ * by the given value type enumeration value.
+ *
+ * @tparam T the value type enumeration value
+ */
 template<ValueType T>
 struct Trait;
 
