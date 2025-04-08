@@ -27,8 +27,13 @@
 #include "Trait.hpp"
 
 namespace simple_json {
+/**
+ * Represents a JSON value.
+ */
 struct Value {
+    /** The type of the contained value. */
     ValueType type;
+    /** The actual contained value.      */
     std::variant<
         Trait<ValueType::Int>::Type,
         Trait<ValueType::Array>::Type,
@@ -37,11 +42,27 @@ struct Value {
         Trait<ValueType::Object>::Type
     > value;
 
+    /**
+     * @brief Returns the contained value casted as the given type.
+     *
+     * Throws an exception if the contained value is not of the given type.
+     * Consider checking the type (for instance with `is(ValueType)`) before
+     * casting.
+     *
+     * @tparam T the value type to cast the contained value to
+     * @return the casted value
+     */
     template<ValueType T>
     constexpr inline auto as() const {
         return std::get<typename Trait<T>::Type>(value);
     }
 
+    /**
+     * Returns whether the contained type is equal to the given type.
+     *
+     * @param type the type to compare against
+     * @return whether the types match
+     */
     constexpr inline auto is(ValueType type) const -> bool {
         return Value::type == type;
     }
