@@ -26,8 +26,20 @@
 #include <string>
 
 namespace simple_json {
+/**
+ * @brief Represents a parsing exception.
+ *
+ * Its message includes the location of the error in the parsed stream.
+ */
 class Exception: public std::runtime_error {
 public:
+    /**
+     * Constructs an exception with the given information.
+     *
+     * @param expected the expected character
+     * @param got the character that was actually at that position
+     * @param pos the position in the stream
+     */
     inline Exception(char expected, char got, long long pos):
         std::runtime_error(std::string { "Expected '" } + expected + "', got '" + got + "', position: " + std::to_string(pos + 1)) {}
 
