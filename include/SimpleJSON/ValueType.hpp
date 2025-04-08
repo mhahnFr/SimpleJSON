@@ -23,8 +23,22 @@
 #define SimpleJSON_ValueType_hpp
 
 namespace simple_json {
+/**
+ * An enumeration of the known value types.
+ */
 enum class ValueType {
-    Int, String, Array, Bool, Object, Null
+    /** An integral number.                    */
+    Int,
+    /** A string.                              */
+    String,
+    /** An array (can contain multiple types). */
+    Array,
+    /** A boolean value.                       */
+    Bool,
+    /** An object.                             */
+    Object,
+    /** The special value `null`.              */
+    Null
 };
 }
 
