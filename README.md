@@ -9,8 +9,8 @@ _How to use coming sooner!_
 This library adheres to the C++17 standard. No other dependencies are required.
 
 # Final notes
-This proect is licensed under the terms of the GNU GPL in version 3 or later.
+This project is marked with CC0 1.0 Universal.
 
-© Copyright 2024 - 2025 [mhahnFr][1]
+Written in 2024 - 2025 by [mhahnFr][1]
 
 [1]: https://github.com/mhahnFr
