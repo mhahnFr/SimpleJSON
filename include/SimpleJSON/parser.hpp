@@ -21,17 +21,55 @@
 #include "Object.hpp"
 
 namespace simple_json {
+/**
+ * Parses a JSON object or array from the given input stream.
+ *
+ * Does not check for the integrity of JSON data.
+ *
+ * @param stream the input stream to read the JSON data from
+ * @return the JSON data as @c Value
+ * @throws an @c Exception if the parsing failed
+ */
 auto parse(std::istream& stream) -> Value;
 
+/**
+ * Parses a JSON object or array from the given input stream.
+ *
+ * Does not check for the integrity of JSON data.
+ *
+ * @param stream the input stream to read the JSON data from
+ * @return the JSON data as @c Value
+ * @throws an @c Exception if the parsing failed
+ */
 static inline auto parse(std::istream&& stream) -> Value {
     return parse(stream);
 }
 
+/**
+ * Parses a JSON object or array from the given input stream.
+ *
+ * Does not check for the integrity of the JSON data.
+ *
+ * @param stream the input stream to read the JSON data from
+ * @tparam T the @c ValueType to cast the parsed data to
+ * @return the parsed data casted to the given JSON value type
+ * @throws an @c Exception if the parsing failed or the contained data has a different type
+ */
 template<ValueType T>
 constexpr inline auto parse(std::istream& stream) {
     return parse(stream).as<T>();
 }
 
+/**
+ * Parses a JSON object or array from the given input stream.
+ *
+ * Does not check for the integrity of the JSON data.
+ *
+ * @param stream the input stream to read the JSON data from
+ * @tparam T the @c ValueType to cast the parsed data to
+ * @return the parsed data casted to the given JSON value type
+ * @throws an @c Exception if the parsing failed or the contained data has a different type
+ */
 template<ValueType T>
 constexpr inline auto parse(std::istream&& stream) {
     return parse(stream).as<T>();
