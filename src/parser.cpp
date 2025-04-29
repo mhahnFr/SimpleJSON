@@ -17,12 +17,25 @@
 #include <SimpleJSON/parser.hpp>
 
 namespace simple_json {
+/**
+ * Skips the next whitespaces in the given input stream.
+ *
+ * @param in the input stream
+ */
 static inline void skipWhitespaces(std::istream& in) {
     while (std::isspace(in.peek())) {
         in.get();
     }
 }
 
+/**
+ * Expects the next character in the given stream to be the given one.
+ *
+ * @param in the input stream
+ * @param expected the expected character
+ * @param skipWhite whether to skip remaining whitespaces before checking the character
+ * @throws an exception if the character is not the expected one
+ */
 static inline void expect(std::istream& in, char expected, bool skipWhite = true) {
     if (skipWhite) {
         skipWhitespaces(in);
@@ -32,11 +45,27 @@ static inline void expect(std::istream& in, char expected, bool skipWhite = true
     }
 }
 
+/**
+ * @brief Expects the next character in the given stream to be the given one.
+ *
+ * The expected character is consumed if found.
+ *
+ * @param in the input stream
+ * @param expected the expected character
+ * @param skipWhite whether to skip remaining whitespaces before checking the character
+ * @throws an exception if the character is not the expected one
+ */
 static inline void expectConsume(std::istream& in, char expected, bool skipWhite = true) {
     expect(in, expected, skipWhite);
     in.get();
 }
 
+/**
+ * Reads a string surrounded by quotes.
+ *
+ * @param in the input stream to read from
+ * @return the read string as @c Value
+ */
 static inline auto readString(std::istream& in) -> Value {
     expectConsume(in, '"');
 
@@ -49,6 +78,14 @@ static inline auto readString(std::istream& in) -> Value {
     return Value { ValueType::String, buffer };
 }
 
+/**
+ * Reads a primitive value from the given stream.
+ *
+ * Primitives are numbers (parsed as base 10), `true`, `false` and `null`.
+ *
+ * @param in the input stream
+ * @return the read primitive as @c Value
+ */
 static inline auto readPrimitive(std::istream& in) -> Value {
     std::string buffer;
     while (!std::isspace(in.peek()) && in.peek() != ',' && in.peek() != ']' && in.peek() != '}') {
@@ -62,8 +99,22 @@ static inline auto readPrimitive(std::istream& in) -> Value {
     return Value { ValueType::Int, std::strtol(buffer.c_str(), nullptr, 10) };
 }
 
+/**
+ * Parses a JSON object surrounded by curly brackets.
+ *
+ * @param in the input stream
+ * @return the parsed object as @c Value
+ */
 static inline auto readObject(std::istream& in) -> Value;
 
+/**
+ * @brief Parses a JSON array surrounded by square brackets.
+ *
+ * JSON arrays may contain any kind of JSON value, including a mixture of types.
+ *
+ * @param in the input stream
+ * @return the parsed array as @c Value
+ */
 static inline auto readArray(std::istream& in) -> Value {
     expectConsume(in, '[');
     skipWhitespaces(in);
