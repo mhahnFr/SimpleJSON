@@ -16,6 +16,12 @@
 #ifndef SimpleJSON_SimpleJSON_hpp
 #define SimpleJSON_SimpleJSON_hpp
 
+/**
+ * @file SimpleJSON.hpp
+ *
+ * This header includes all parts of the API of SimpleJSON.
+ */
+
 #include "Exception.hpp"
 #include "Object.hpp"
 #include "parser.hpp"
