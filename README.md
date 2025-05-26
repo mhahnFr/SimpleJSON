@@ -145,7 +145,7 @@ In case the desired value is absent or `null`, the member functions `get`, `getO
 ##### `get`
 Returns an optional with the desired [value type][5].
 
-Example:
+**Example:**
 ```c++
 simple_json::Object object = simple_json::parse(stream);
 
@@ -155,7 +155,7 @@ auto name = object.get<simple_json::ValueType::String>("name");
 ##### `getObject`
 Returns an optional with a [JSON object][6].
 
-Example:
+**Example:**
 ```c++
 simple_json::Object object = simple_json::parse(stream);
 
@@ -165,7 +165,7 @@ auto innerObject = object.getObject("innerDataName");
 ##### `maybeGetAs`
 Returns an optional with the contained object wrapped into an instance of the given class.
 
-Example:
+**Example:**
 ```c++
 class Wrapper {
 public:
@@ -186,7 +186,7 @@ In case the desired value is not present or `null`, an exception is thrown.
 ##### `getBang`
 Returns a reference to the [JSON value][5] of the given name. The contained value is not copied.
 
-Example:
+**Example:**
 ```c++
 simple_json::Object object = simple_json::parse(stream);
 
@@ -196,7 +196,7 @@ auto name = object.getBang<simple_json::ValueType::String>("name");
 ##### `getObjectBang`
 Returns the contained object.
 
-Example:
+**Example:**
 ```c++
 simple_json::Object object = simple_json::parse(stream);
 
