@@ -81,7 +81,7 @@ static inline auto readString(std::istream& in) -> Value {
 /**
  * Reads a primitive value from the given stream.
  *
- * Primitives are numbers (parsed as base 10), `true`, `false` and `null`.
+ * Primitives are numbers (parsed as base 10), @c true, @c false and @c null .
  *
  * @param in the input stream
  * @return the read primitive as @c Value

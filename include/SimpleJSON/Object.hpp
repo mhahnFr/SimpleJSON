@@ -26,7 +26,7 @@ namespace simple_json {
  * @brief Represents a JSON object.
  *
  * It can be constructed from JSON values (if they contain an object) or from
- * the raw content of a JSON object (the `ObjectContent` type).
+ * the raw content of a JSON object (the @c ObjectContent type).
  *
  * Various accessors enable the simple usage of the content of an JSON object.
  */
@@ -60,7 +60,7 @@ struct Object {
      *
      * @param name the key whose mapped value to get
      * @tparam T the type of the contained value
-     * @return the value for the given key or `std::nullopt` if not found or `null`
+     * @return the value for the given key or @c std::nullopt if not found or @c null
      */
     template<typename T>
     constexpr inline auto get(const std::string& name) const -> std::optional<T> {
@@ -79,7 +79,7 @@ struct Object {
      *
      * @param name the key whose mapped value to get
      * @tparam T the value type enumeration value of the desired type
-     * @return the value for the given key or `std::nullopt` if not found or @c null
+     * @return the value for the given key or @c std::nullopt if not found or @c null
      */
     template<ValueType T>
     constexpr inline auto get(const std::string& name) const {
@@ -92,7 +92,7 @@ struct Object {
      * Throws an exception if the value  is found but is not a JSON object.
      *
      * @param name the key whose mapped object to get
-     * @return the object for the given key or `std::nullopt` if not found or @c null
+     * @return the object for the given key or @c std::nullopt if not found or @c null
      */
     inline auto getObject(const std::string& name) const -> std::optional<Object> {
         if (auto object = get<ValueType::Object>(name)) {
@@ -149,7 +149,7 @@ struct Object {
      *
      * @param name the key whose mapped object to get
      * @tparam T the type to construct from the contained JSON object
-     * @return the mapped object casted to the given type or `std::nullopt` if not found or @c null
+     * @return the mapped object casted to the given type or @c std::nullopt if not found or @c null
      */
     template<
 #if __cplusplus >= 202002L

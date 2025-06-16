@@ -40,7 +40,7 @@ struct Value {
      * @brief Returns the contained value casted as the given type.
      *
      * Throws an exception if the contained value is not of the given type.
-     * Consider checking the type (for instance with `is(ValueType)`) before
+     * Consider checking the type (for instance with @c is(ValueType)) before
      * casting.
      *
      * @tparam T the value type to cast the contained value to
