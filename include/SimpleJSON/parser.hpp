@@ -28,7 +28,7 @@ namespace simple_json {
  *
  * @param stream the input stream to read the JSON data from
  * @return the JSON data as @c Value
- * @throws an @c Exception if the parsing failed
+ * @throws Exception if the parsing failed
  */
 auto parse(std::istream& stream) -> Value;
 
@@ -39,7 +39,7 @@ auto parse(std::istream& stream) -> Value;
  *
  * @param stream the input stream to read the JSON data from
  * @return the JSON data as @c Value
- * @throws an @c Exception if the parsing failed
+ * @throws Exception if the parsing failed
  */
 static inline auto parse(std::istream&& stream) -> Value {
     return parse(stream);
@@ -53,7 +53,7 @@ static inline auto parse(std::istream&& stream) -> Value {
  * @param stream the input stream to read the JSON data from
  * @tparam T the @c ValueType to cast the parsed data to
  * @return the parsed data casted to the given JSON value type
- * @throws an @c Exception if the parsing failed or the contained data has a different type
+ * @throws Exception if the parsing failed or the contained data has a different type
  */
 template<ValueType T>
 constexpr inline auto parse(std::istream& stream) {
@@ -68,7 +68,7 @@ constexpr inline auto parse(std::istream& stream) {
  * @param stream the input stream to read the JSON data from
  * @tparam T the @c ValueType to cast the parsed data to
  * @return the parsed data casted to the given JSON value type
- * @throws an @c Exception if the parsing failed or the contained data has a different type
+ * @throws Exception if the parsing failed or the contained data has a different type
  */
 template<ValueType T>
 constexpr inline auto parse(std::istream&& stream) {

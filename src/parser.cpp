@@ -34,7 +34,7 @@ static inline void skipWhitespaces(std::istream& in) {
  * @param in the input stream
  * @param expected the expected character
  * @param skipWhite whether to skip remaining whitespaces before checking the character
- * @throws an exception if the character is not the expected one
+ * @throws Exception if the character is not the expected one
  */
 static inline void expect(std::istream& in, char expected, bool skipWhite = true) {
     if (skipWhite) {
@@ -53,7 +53,7 @@ static inline void expect(std::istream& in, char expected, bool skipWhite = true
  * @param in the input stream
  * @param expected the expected character
  * @param skipWhite whether to skip remaining whitespaces before checking the character
- * @throws an exception if the character is not the expected one
+ * @throws Exception if the character is not the expected one
  */
 static inline void expectConsume(std::istream& in, char expected, bool skipWhite = true) {
     expect(in, expected, skipWhite);
