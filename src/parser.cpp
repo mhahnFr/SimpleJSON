@@ -36,7 +36,7 @@ static inline void skipWhitespaces(std::istream& in) {
  * @param skipWhite whether to skip remaining whitespaces before checking the character
  * @throws Exception if the character is not the expected one
  */
-static inline void expect(std::istream& in, char expected, bool skipWhite = true) {
+static inline void expect(std::istream& in, const char expected, bool skipWhite = true) {
     if (skipWhite) {
         skipWhitespaces(in);
     }
@@ -55,7 +55,7 @@ static inline void expect(std::istream& in, char expected, bool skipWhite = true
  * @param skipWhite whether to skip remaining whitespaces before checking the character
  * @throws Exception if the character is not the expected one
  */
-static inline void expectConsume(std::istream& in, char expected, bool skipWhite = true) {
+static inline void expectConsume(std::istream& in, const char expected, bool skipWhite = true) {
     expect(in, expected, skipWhite);
     in.get();
 }
@@ -146,7 +146,7 @@ static inline auto readObject(std::istream& in) -> Value {
     auto toReturn = std::map<std::string, Value>();
     skipWhitespaces(in);
     while (in.peek() != '}') {
-        auto name = readString(in);
+        auto [type, strValue] = readString(in);
         expectConsume(in, ':');
         skipWhitespaces(in);
         Value value;
@@ -157,7 +157,7 @@ static inline auto readObject(std::istream& in) -> Value {
 
             default: value = readPrimitive(in); break;
         }
-        toReturn.emplace(std::make_pair(std::get<std::string>(name.value), value));
+        toReturn.emplace(std::get<std::string>(strValue), value);
         skipWhitespaces(in);
         if (in.peek() == ',') {
             in.get();
@@ -168,14 +168,14 @@ static inline auto readObject(std::istream& in) -> Value {
     return { ValueType::Object, toReturn };
 }
 
-auto parse(std::istream& in) -> Value {
-    skipWhitespaces(in);
+auto parse(std::istream& stream) -> Value {
+    skipWhitespaces(stream);
 
-    switch (in.peek()) {
-        case '{': return readObject(in);
-        case '[': return readArray(in);
+    switch (stream.peek()) {
+        case '{': return readObject(stream);
+        case '[': return readArray(stream);
 
-        default: throw Exception('{', char(in.peek()), in.tellg());
+        default: throw Exception('{', char(stream.peek()), stream.tellg());
     }
 }
 }
