@@ -25,7 +25,7 @@ namespace simple_json {
  *
  * Its message includes the location of the error in the parsed stream.
  */
-class Exception: public std::runtime_error {
+class Exception final: public std::runtime_error {
 public:
     /**
      * Constructs an exception with the given information.
@@ -34,7 +34,7 @@ public:
      * @param got the character that was actually at that position
      * @param pos the position in the stream
      */
-    inline Exception(char expected, char got, long long pos):
+    inline Exception(const char expected, const char got, const long long pos):
         std::runtime_error(std::string { "Expected '" } + expected + "', got '" + got + "', position: " + std::to_string(pos + 1)) {}
 
     Exception() = delete;
