@@ -54,11 +54,11 @@ struct Value {
     /**
      * Returns whether the contained type is equal to the given type.
      *
-     * @param type the type to compare against
+     * @param otherType the type to compare against
      * @return whether the types match
      */
-    constexpr inline auto is(ValueType type) const -> bool {
-        return Value::type == type;
+    [[nodiscard]] constexpr inline auto is(const ValueType otherType) const -> bool {
+        return type == otherType;
     }
 };
 }
