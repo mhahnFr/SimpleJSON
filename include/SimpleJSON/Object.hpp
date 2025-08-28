@@ -18,6 +18,7 @@
 
 #include <map>
 #include <optional>
+#include <utility>
 
 #include "Value.hpp"
 
@@ -41,7 +42,7 @@ struct Object {
      *
      * @param content the raw JSON content
      */
-    inline Object(const ObjectContent& content): content(content) {}
+    inline Object(ObjectContent content): content(std::move(content)) {}
 
     /**
      * @brief Constructs a JSON object from the given JSON value.
@@ -63,9 +64,8 @@ struct Object {
      * @return the value for the given key or @c std::nullopt if not found or @c null
      */
     template<typename T>
-    constexpr inline auto get(const std::string& name) const -> std::optional<T> {
-        const auto& it = content.find(name);
-        if (it != content.end() && !it->second.is(ValueType::Null)) {
+    [[nodiscard]] constexpr inline auto get(const std::string& name) const -> std::optional<T> {
+        if (const auto& it = content.find(name); it != content.end() && !it->second.is(ValueType::Null)) {
             return std::get<T>(it->second.value);
         }
         return std::nullopt;
@@ -82,7 +82,7 @@ struct Object {
      * @return the value for the given key or @c std::nullopt if not found or @c null
      */
     template<ValueType T>
-    constexpr inline auto get(const std::string& name) const {
+    [[nodiscard]] constexpr inline auto get(const std::string& name) const {
         return get<typename Trait<T>::Type>(name);
     }
 
@@ -94,8 +94,8 @@ struct Object {
      * @param name the key whose mapped object to get
      * @return the object for the given key or @c std::nullopt if not found or @c null
      */
-    inline auto getObject(const std::string& name) const -> std::optional<Object> {
-        if (auto object = get<ValueType::Object>(name)) {
+    [[nodiscard]] inline auto getObject(const std::string& name) const -> std::optional<Object> {
+        if (const auto object = get<ValueType::Object>(name)) {
             return Object { *object };
         }
         return std::nullopt;
@@ -111,7 +111,7 @@ struct Object {
      * @return the mapped value
      */
     template<typename T>
-    constexpr inline auto getBang(const std::string& name) const -> const T& {
+    [[nodiscard]] constexpr inline auto getBang(const std::string& name) const -> const T& {
         return std::get<T>(content.at(name).value);
     }
 
@@ -125,7 +125,7 @@ struct Object {
      * @return the mapped value
      */
     template<ValueType T>
-    constexpr inline auto getBang(const std::string& name) const -> const typename Trait<T>::Type& {
+    [[nodiscard]] constexpr inline auto getBang(const std::string& name) const -> const typename Trait<T>::Type& {
         return getBang<typename Trait<T>::Type>(name);
     }
 
@@ -137,7 +137,7 @@ struct Object {
      * @param name the key whose mapped object to get
      * @return the mapped object
      */
-    inline auto getObjectBang(const std::string& name) const -> Object {
+    [[nodiscard]] inline auto getObjectBang(const std::string& name) const -> Object {
         return Object { getBang<ValueType::Object>(name) };
     }
 
