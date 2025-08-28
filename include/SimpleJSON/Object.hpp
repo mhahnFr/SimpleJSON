@@ -149,7 +149,7 @@ struct Object {
      *
      * @param name the key whose mapped object to get
      * @tparam T the type to construct from the contained JSON object
-     * @return the mapped object casted to the given type or @c std::nullopt if not found or @c null
+     * @return the mapped object cast to the given type or @c std::nullopt if not found or @c null
      */
     template<
 #if __cplusplus >= 202002L

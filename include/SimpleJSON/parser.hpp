@@ -52,7 +52,7 @@ static inline auto parse(std::istream&& stream) -> Value {
  *
  * @param stream the input stream to read the JSON data from
  * @tparam T the @c ValueType to cast the parsed data to
- * @return the parsed data casted to the given JSON value type
+ * @return the parsed data cast to the given JSON value type
  * @throws Exception if the parsing failed or the contained data has a different type
  */
 template<ValueType T>
@@ -67,7 +67,7 @@ constexpr inline auto parse(std::istream& stream) {
  *
  * @param stream the input stream to read the JSON data from
  * @tparam T the @c ValueType to cast the parsed data to
- * @return the parsed data casted to the given JSON value type
+ * @return the parsed data cast to the given JSON value type
  * @throws Exception if the parsing failed or the contained data has a different type
  */
 template<ValueType T>
